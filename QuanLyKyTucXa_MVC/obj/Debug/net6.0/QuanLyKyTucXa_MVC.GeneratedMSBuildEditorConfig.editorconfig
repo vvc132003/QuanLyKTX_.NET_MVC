@@ -1,0 +1,33 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = QuanLyKyTucXa_MVC
+build_property.RootNamespace = QuanLyKyTucXa_MVC
+build_property.ProjectDir = C:\Users\vvc13\source\repos\QuanLyKyTucXa_MVC\QuanLyKyTucXa_MVC\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\vvc13\source\repos\QuanLyKyTucXa_MVC\QuanLyKyTucXa_MVC
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/vvc13/source/repos/QuanLyKyTucXa_MVC/QuanLyKyTucXa_MVC/Views/Layout/header.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGF5b3V0XGhlYWRlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vvc13/source/repos/QuanLyKyTucXa_MVC/QuanLyKyTucXa_MVC/Views/Layout/navbar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGF5b3V0XG5hdmJhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vvc13/source/repos/QuanLyKyTucXa_MVC/QuanLyKyTucXa_MVC/Views/Phong/PhongCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmdcUGhvbmdDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/vvc13/source/repos/QuanLyKyTucXa_MVC/QuanLyKyTucXa_MVC/Views/Phong/PhongList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmdcUGhvbmdMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
