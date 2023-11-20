@@ -2,7 +2,7 @@
 
 namespace QuanLyKyTucXa_MVC.Repository
 {
-    internal interface ThongTinKhenThuongRepository
+    public interface ThongTinKhenThuongRepository
     {
         List<ThongTinKhenThuong> GetAllKhenThuong();
         List<ThongTinKhenThuong> GetAllKhenThuongID(int id);

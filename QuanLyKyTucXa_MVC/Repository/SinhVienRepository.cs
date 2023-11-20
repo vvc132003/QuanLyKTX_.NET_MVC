@@ -2,9 +2,10 @@
 
 namespace QuanLyKyTucXa_MVC.Repository
 {
-    internal interface SinhVienRepository
+    public interface SinhVienRepository
     {
         List<SinhVien> GetAllStudents();
+        List<SinhVien> GetAllStudentsIDPhong(int id);
         bool KiemTraTonTaiMaSinhVien(string masv);
         void ThemSinhVien(SinhVien sinhVien);
         void UpdateSinhVien(SinhVien sinhVien);
@@ -16,5 +17,7 @@ namespace QuanLyKyTucXa_MVC.Repository
         List<SinhVien> SapXepSinhVienGiamDanTheoTen();
         List<SinhVien> SapXepSinhVienTangDanTheoTen();
         List<SinhVien> SapXepSinhVienTangDanTheoMaPhong();
+        SinhVien SinhVienGteById(string id);
+
     }
 }

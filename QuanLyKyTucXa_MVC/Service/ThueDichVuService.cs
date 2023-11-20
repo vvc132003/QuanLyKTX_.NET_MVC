@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace QuanLyKyTucXa_MVC.Service
 {
-    internal class ThueDichVuService : ThueDichVuRepository
+    public class ThueDichVuService : ThueDichVuRepository
     {
         public void ThemThueDichVu(ThueDichVu thueDichVu, int idNguoiDung, int idThuePhong, int idDichVu, double thanhTien, string idSinhVien)
         {

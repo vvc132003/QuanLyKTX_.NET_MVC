@@ -2,7 +2,7 @@
 
 namespace QuanLyKyTucXa_MVC.Repository
 {
-    internal interface ChuyenPhongRepository
+    public interface ChuyenPhongRepository
     {
         void ChuyenPhong(ChuyenPhong chuyenPhong, int idphongcu, int idphongmoi);
     }

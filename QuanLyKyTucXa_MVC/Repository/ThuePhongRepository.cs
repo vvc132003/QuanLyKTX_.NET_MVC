@@ -2,7 +2,7 @@
 
 namespace QuanLyKyTucXa_MVC.Repository
 {
-    internal interface ThuePhongRepository
+    public interface ThuePhongRepository
     {
         void ThuePhong(ThuePhong thuePhong);
         List<ThuePhong> GetAllTinThuePhong();

@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace QuanLyKyTucXa_MVC.Service
 {
-    internal class KyLuatService
+    public class KyLuatService
     {
         private SqlConnection connection = DBUtils.GetDBConnection();
 

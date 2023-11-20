@@ -2,7 +2,7 @@
 
 namespace QuanLyKyTucXa_MVC.Repository
 {
-    internal interface KyLuatRepository
+    public interface KyLuatRepository
     {
         void ThemKyLuat(KyLuat kyLuat, int idNguoiDung, string idSinhVien);
     }

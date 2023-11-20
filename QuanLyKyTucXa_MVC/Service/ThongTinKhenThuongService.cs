@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace QuanLyKyTucXa_MVC.Service
 {
-    internal class ThongTinKhenThuongService : ThongTinKhenThuongRepository
+    public class ThongTinKhenThuongService : ThongTinKhenThuongRepository
     {
         private SqlConnection connection = DBUtils.GetDBConnection();
 

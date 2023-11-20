@@ -6,7 +6,7 @@ using ketnoicsdllan1;
 
 namespace QuanLyKyTucXa_MVC.Service
 {
-    internal class SinhVienService : SinhVienRepository
+    public class SinhVienService : SinhVienRepository
     {
         private SqlConnection connection = DBUtils.GetDBConnection();
         public List<SinhVien> GetAllStudents()
@@ -311,6 +311,82 @@ namespace QuanLyKyTucXa_MVC.Service
             }
             connection.Close();
             return sinhviens;
+        }
+
+
+
+
+
+
+
+
+
+
+        public List<SinhVien> GetAllStudentsIDPhong(int id)
+        {
+            List<SinhVien> students = new List<SinhVien>();
+            using (SqlConnection connection = DBUtils.GetDBConnection())
+            {
+                connection.Open();
+                string sql = "SELECT * FROM SinhVien WHERE   idphong = @idPhong";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@idPhong", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            SinhVien student = new SinhVien()
+                            {
+                                id = reader["id"].ToString(),
+                                tensinhvien = reader["tensinhvien"].ToString(),
+                                khoahoc = reader["khoahoc"].ToString(),
+                                nganhhoc = reader["nganhhoc"].ToString(),
+                                email = reader["email"].ToString(),
+                                sodienthoai = reader["sodienthoai"].ToString(),
+                                idphong = (int)reader["idphong"],
+                                gioitinh = reader["gioitinh"].ToString(),
+                                quequan = reader["quequan"].ToString(),
+                                trang_thai = reader["trang_thai"].ToString(),
+                                solanvipham = (int)reader["solanvipham"],
+                                ngayvao = (DateTime)reader["ngayvao"],
+                                ngaysinh = (DateTime)reader["ngaysinh"]
+                            };
+                            students.Add(student);
+                        }
+                    }
+                }
+            }
+            return students;
+        }
+
+
+        public SinhVien SinhVienGteById(string id)
+        {
+            using (SqlConnection connection = DBUtils.GetDBConnection())
+            {
+                connection.Open();
+                string sql = "SELECT id,tensinhvien,idphong FROM SinhVien WHERE id = @id";
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            SinhVien student = new SinhVien();
+                            student.id = reader["id"].ToString();
+                            student.tensinhvien = reader["tensinhvien"].ToString();
+                            student.idphong = (int)reader["idphong"];
+                            return student;
+                        }
+                        else
+                        {
+                            return null;
+                        }
+                    }
+                }
+            }
         }
     }
 }

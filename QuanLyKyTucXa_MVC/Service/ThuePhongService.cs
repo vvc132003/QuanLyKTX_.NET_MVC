@@ -6,7 +6,7 @@ using ketnoicsdllan1;
 
 namespace QuanLyKyTucXa_MVC.Service
 {
-    internal class ThuePhongService : ThuePhongRepository
+    public class ThuePhongService : ThuePhongRepository
     {
         public void ThuePhong(ThuePhong thuePhong)
         {

@@ -2,9 +2,9 @@
 
 namespace QuanLyKyTucXa_MVC.Repository
 {
-    internal interface TraPhongRepository
+    public interface TraPhongRepository
     {
-        void TraPhong(TraPhong traPhong, int idphong);
+        void TraPhong(TraPhong traPhong, int idphong, string masv, int idnguoidung);
         List<TraPhong> GetAllTinTraPhong();
     }
 }

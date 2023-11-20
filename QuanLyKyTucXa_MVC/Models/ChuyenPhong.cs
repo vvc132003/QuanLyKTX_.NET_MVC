@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyKyTucXa_MVC.Models
 {
-    internal class ChuyenPhong
+    public class ChuyenPhong
     {
         public int id { get; set; }
         public string idsinhvien { get; set; }

@@ -8,12 +8,15 @@ namespace QuanLyKyTucXa_MVC.Controllers
 {
     public class PhongController : Controller
     {
-        private readonly PhongRepository phongService;
+        private readonly PhongService phongService;
+        private readonly SinhVienService sinhVienService;
 
-        public PhongController(PhongRepository phongServiceS)
+        public PhongController(PhongService phongServices, SinhVienService sinhVienServices)
         {
-            phongService = phongServiceS;
+            phongService = phongServices;
+            sinhVienService = sinhVienServices;
         }
+
         [HttpGet]
         public IActionResult PhongList()
         {
@@ -32,6 +35,20 @@ namespace QuanLyKyTucXa_MVC.Controllers
         {
             phongService.ThemPhong(phong);
             return RedirectToAction("PhongList");
+        }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            phongService.XoaPhong(id);
+            return RedirectToAction("PhongList");
+        }
+
+
+        [HttpGet]
+        public IActionResult GetAllStudentsIDPhong(int id)
+        {
+            List<SinhVien> sinhviens = sinhVienService.GetAllStudentsIDPhong(id);
+            return View(sinhviens);
         }
     }
 }

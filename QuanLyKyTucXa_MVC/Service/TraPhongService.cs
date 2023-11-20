@@ -6,7 +6,7 @@ using ketnoicsdllan1;
 
 namespace QuanLyKyTucXa_MVC.Service
 {
-    internal class TraPhongService : TraPhongRepository
+    public class TraPhongService : TraPhongRepository
     {
         public List<TraPhong> GetAllTinTraPhong()
         {
@@ -46,7 +46,7 @@ namespace QuanLyKyTucXa_MVC.Service
         }
 
 
-        public void TraPhong(TraPhong traPhong, int idphong)
+        public void TraPhong(TraPhong traPhong, int idphong, string masv, int idnguoidung)
         {
             using (SqlConnection connection = DBUtils.GetDBConnection())
             {
@@ -54,8 +54,8 @@ namespace QuanLyKyTucXa_MVC.Service
                 using (SqlCommand command = new SqlCommand("TraPhongs", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@idsinhvien", traPhong.idsinhvien);
-                    command.Parameters.AddWithValue("@idnguoidung", traPhong.idnguoidung);
+                    command.Parameters.AddWithValue("@idsinhvien", masv);
+                    command.Parameters.AddWithValue("@idnguoidung", idnguoidung);
                     command.Parameters.AddWithValue("@idphong", idphong);
                     command.Parameters.AddWithValue("@lydo", traPhong.lydo);
                     command.Parameters.AddWithValue("@ngaytra", traPhong.ngaytra);

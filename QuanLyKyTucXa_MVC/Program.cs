@@ -6,7 +6,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<PhongRepository, PhongService>();
+builder.Services.AddScoped<PhongService>();
+builder.Services.AddScoped<SinhVienService>();
+builder.Services.AddScoped<TraPhongService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 

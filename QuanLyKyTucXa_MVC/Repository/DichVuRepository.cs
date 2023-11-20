@@ -2,7 +2,7 @@
 
 namespace QuanLyKyTucXa_MVC.Repository
 {
-    internal interface DichVuRepository
+    public interface DichVuRepository
     {
         void ThemDichVu(DichVu dichVu);
         List<DichVu> GetAllDichVu();

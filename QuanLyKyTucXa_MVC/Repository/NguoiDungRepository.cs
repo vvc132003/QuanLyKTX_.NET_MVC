@@ -2,7 +2,7 @@
 
 namespace QuanLyKyTucXa_MVC.Repository
 {
-    internal interface NguoiDungRepository
+    public interface NguoiDungRepository
     {
         NguoiDung CheckThongTinDangNhap(string matkhau, string tendangnhap);
         int LayIDNguoiDung(string tendangnhap);

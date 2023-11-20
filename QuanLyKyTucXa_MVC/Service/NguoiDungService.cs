@@ -5,7 +5,7 @@ using System.Data;
 
 namespace QuanLyKyTucXa_MVC.Service
 {
-    internal class NguoiDungService
+    public class NguoiDungService
     {
         private SqlConnection connection = DBUtils.GetDBConnection();
 
