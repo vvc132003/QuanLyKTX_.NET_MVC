@@ -129,7 +129,8 @@ namespace QuanLyKyTucXa_MVC.Service
                             id = (int)reader["id"],
                             sogiuong = (int)reader["sogiuong"],
                             songuoio = (int)reader["songuoio"],
-                            loaiphong = reader["loaiphong"].ToString()
+                            loaiphong = reader["loaiphong"].ToString(),
+                            giaphong = Convert.ToSingle(reader["giaphong"])
                         };
                         return phong;
                     }

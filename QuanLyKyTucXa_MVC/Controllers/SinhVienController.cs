@@ -61,19 +61,22 @@ namespace QuanLyKyTucXa_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult ThuePhong(SinhVien sinhVien,string id, int idp)
+        public IActionResult ThuePhong(SinhVien sinhVien,ThuePhong thuePhong, string id, int idp)
         {
             Phong phong = phongService.LayPhongTheoMa(idp);
             if (phong != null && phong.songuoio < phong.sogiuong)
             {
-                if (phong.loaiphong == sinhVien.gioitinh)
+                if (phong.loaiphong == sinhVien.gioitinh && sinhVien.ngaysinh.Day < sinhVien.ngayvao.Day ||
+                    sinhVien.ngaysinh.Month < sinhVien.ngayvao.Month)
                 {
                     sinhVien.idphong = idp;
                     sinhVien.solanvipham = 0;
                     sinhVien.trang_thai = "Đã thuê";
                     sinhVienService.ThemSinhVien(sinhVien);
                     phongService.CapNhatSoNguoiO(phong, phong.songuoio + 1);
-                    thuePhongService.ThuePhong(id, idp, 1, sinhVien.ngayvao);
+                    thuePhong.trangthai = "Đã thuê";
+                    thuePhong.idsinhvien = id;
+                    thuePhongService.ThuePhong(thuePhong,id, idp, 1);
                     return RedirectToAction("PhongList", "Phong");
                 }
                 else

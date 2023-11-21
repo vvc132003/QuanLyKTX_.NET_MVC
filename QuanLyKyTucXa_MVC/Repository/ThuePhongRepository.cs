@@ -4,7 +4,7 @@ namespace QuanLyKyTucXa_MVC.Repository
 {
     public interface ThuePhongRepository
     {
-        void ThuePhong( String masv, int idphong, int idnguoidung, DateTime ngaythue);
+        void ThuePhong(ThuePhong thuePhong, String masv, int idphong, int idnguoidung);
         List<ThuePhong> GetAllTinThuePhong();
         int LayMaThuePhongTheoIDSV(string masv);
     }
