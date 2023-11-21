@@ -8,13 +8,14 @@ namespace QuanLyKyTucXa_MVC.Service
 {
     public class ThuePhongService : ThuePhongRepository
     {
-        public void ThuePhong(ThuePhong thuePhong)
+        public void ThuePhong(String masv, int idphong, int idnguoidung, DateTime ngaythue)
         {
             using (SqlConnection connection = DBUtils.GetDBConnection())
             {
                 connection.Open();
                 using (SqlCommand command = new SqlCommand("ThuePhongs", connection))
                 {
+                    ThuePhong thuePhong = new ThuePhong();
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@idnguoidung", thuePhong.idnguoidung);
                     command.Parameters.AddWithValue("@idphong", thuePhong.idphong);

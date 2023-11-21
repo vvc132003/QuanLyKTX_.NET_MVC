@@ -1,6 +1,6 @@
-﻿<!-- Ionicons CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.4.0/css/ionicons.min.css" integrity="sha512-..." crossorigin="anonymous" />
-
+﻿<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/5.4.0/css/ionicons.min.css" integrity="sha512-..." crossorigin="anonymous" />
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <aside class="left-sidebar">
     <div class="d-flex no-block nav-text-box align-items-center">
         <span><img src="https://lh3.googleusercontent.com/6wTSaWM0IMQMT5x56OYwuRSsdZvBx0sBDWwOirFK_10PWQInREzh_c4fRrJFDARjHosOcQ4=s40" alt="elegant admin template"></span>
@@ -15,45 +15,88 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li>
-                    <a class="waves-effect waves-dark" href="index.html" aria-expanded="false">
-                        <i class="fa fa-tachometer"></i><span class="hide-menu">Dashboard</span>
+                    <a class="waves-effect waves-dark" href="/Phong/PhongList" aria-expanded="false">
+                        <i class="fas fa-bed orange_color"></i><span class="hide-menu">Phòng</span>
                     </a>
                 </li>
                 <li>
                     <a class="waves-effect waves-dark" href="pages-profile.html" aria-expanded="false">
-                        <i class="fa fa-user-circle-o"></i><span class="hide-menu">Profile</span>
+                        <i class="fas fa-user orange_color"></i><span class="hide-menu">Người dùng</span>
                     </a>
                 </li>
                 <li>
                     <a class="waves-effect waves-dark" href="table-basic.html" aria-expanded="false">
-                        <i class="fa fa-table"></i><span class="hide-menu"></span>Tables
+                        <i class="fas fa-user-tie red_color"></i><span class="hide-menu">Sinh viên</span>
                     </a>
                 </li>
                 <li>
                     <a class="waves-effect waves-dark" href="icon-fontawesome.html" aria-expanded="false">
-                        <i class="fa fa-smile-o"></i><span class="hide-menu"></span>Icon
+                        <i class="fas fa-concierge-bell purple_color2"></i><span class="hide-menu">Dịch vụ</span>
                     </a>
                 </li>
                 <li>
                     <a class="waves-effect waves-dark" href="map-google.html" aria-expanded="false">
-                        <i class="fa fa-globe"></i><span class="hide-menu"></span>Map
+                        <i class="fas fa-exclamation-circle" style="color: red !important;"></i><span class="hide-menu">Kỷ luật</span>
                     </a>
                 </li>
                 <li>
                     <a class="waves-effect waves-dark" href="pages-blank.html" aria-expanded="false">
-                        <i class="fa fa-bookmark-o"></i><span class="hide-menu"></span>Blank
+                        <i class="fas fa-trophy" style="color: yellow !important;"></i><span class="hide-menu">Thông tin khen thưởng</span>
                     </a>
+                </li>
+
+                <li>
+                    <a href="#apps" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-object-group blue2_color"></i> <span>Các loại đơn</span>
+                    </a>
+                    <ul class="collapse list-unstyled" id="apps">
+                        <li>
+                            <a href="">
+                                <i class="fas fa-file-alt blue2_color"></i> <span>Đơn thuê phòng</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-file-invoice blue2_color"></i> <span>Đơn chuyển phòng</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="fas fa-file-signature blue2_color"></i> <span>Đơn trả phòng</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="pages-error-404.html" aria-expanded="false">
-                        <i class="fa fa-question-circle"></i><span class="hide-menu"></span>404
+                    <a class="waves-effect waves-dark" href="pages-blank.html" aria-expanded="false">
+                        <i class="fa fa-bar-chart-o green_color"></i><span class="hide-menu">Thống kê</span>
                     </a>
                 </li>
-                <div class="text-center m-t-30">
-                    <a href="https://wrappixel.com/templates/elegant-admin/"
-                       class="btn waves-effect waves-light btn-success hidden-md-down"> Upgrade to Pro</a>
-                </div>
             </ul>
         </nav>
     </div>
 </aside>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.dropdown-toggle').on('click', function (e) {
+            e.preventDefault();
+            var $parent = $(this).parent();
+            var $submenu = $parent.find('.collapse');
+            if (!$submenu.hasClass('show')) {
+                $('.collapse').removeClass('show');
+            }
+            $submenu.toggleClass('show');
+        });
+
+        $(document).on('click', function (e) {
+            if (!$(e.target).closest('.dropdown-toggle').length) {
+                setTimeout(function () {
+                    $('.collapse').removeClass('show');
+                }, 2000);
+            }
+        });
+    });
+
+</script>
+

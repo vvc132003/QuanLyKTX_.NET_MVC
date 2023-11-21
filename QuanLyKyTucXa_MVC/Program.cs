@@ -9,6 +9,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<PhongService>();
 builder.Services.AddScoped<SinhVienService>();
 builder.Services.AddScoped<TraPhongService>();
+builder.Services.AddScoped<ThuePhongService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 

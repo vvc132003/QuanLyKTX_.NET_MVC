@@ -328,7 +328,7 @@ namespace QuanLyKyTucXa_MVC.Service
             using (SqlConnection connection = DBUtils.GetDBConnection())
             {
                 connection.Open();
-                string sql = "SELECT * FROM SinhVien WHERE   idphong = @idPhong";
+                string sql = "SELECT * FROM SinhVien WHERE trang_thai='Đã thuê' and  idphong = @idPhong";
                 using (SqlCommand command = new SqlCommand(sql, connection))
                 {
                     command.Parameters.AddWithValue("@idPhong", id);

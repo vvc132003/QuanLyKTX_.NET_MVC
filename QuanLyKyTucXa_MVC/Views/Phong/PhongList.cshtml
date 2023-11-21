@@ -20,22 +20,27 @@
                     {
                         foreach (var item in Model)
                         {
-                            var tableClass = @item.songuoio >= 1 ? "reserved" : "available";
+                            var tableClass = @item.songuoio >= 1 ? "conguoi" : "controng";
                             <div id="table-@(item.id)" class="@tableClass room-box">
                                 <p>Số phòng: @item.id</p>
                                 <p>Loại phòng: @item.loaiphong</p>
                                 <p>Số giường: @item.sogiuong</p>
                                 <p>Số người: @item.songuoio</p>
                                 <div class="context-menu">
-                                    <a href="/Phong/GetAllStudentsIDPhong/@item.id">Danh sách sinh viên</a>
-                                    <a href="">Thuê phòng</a>
-                                    <a href="" >Thêm phòng</a>
+                                    <a href="/Phong/GetAllStudentsIDPhong/@item.id">
+                                        <i class="fas fa-info-circle" style="color: red; font-size: 20px; margin-right: 5px;"></i>
+                                        Danh sách sinh viên
+                                    </a>
+                                    <a href="/SinhVien/SinhVienThuePhong/@item.id">
+                                        <i style="font-size: 20px; margin-right: 10px" class="fas fa-bed orange_color"></i>
+                                        Thuê phòng
+                                    </a>
                                 </div>
                             </div>
                             <div class="student-info" id="student-info-@(item.id)"></div>
                         }
                     }
-                </div>
+                </div>          
             </div>
         </div>
     </div>
