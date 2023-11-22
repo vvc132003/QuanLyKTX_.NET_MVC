@@ -18,10 +18,10 @@ namespace QuanLyKyTucXa_MVC.Controllers
         }
 
         [HttpGet]
-        public IActionResult PhongList()
+        public IActionResult Home()
         {
-            List<Phong> PhongList = phongService.GetAllPhong();
-            return View(PhongList);
+            List<Phong> Home = phongService.GetAllPhong();
+            return View(Home);
         }
 
         [HttpGet]

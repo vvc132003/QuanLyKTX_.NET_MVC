@@ -77,14 +77,14 @@ namespace QuanLyKyTucXa_MVC.Controllers
                     thuePhong.trangthai = "Đã thuê";
                     thuePhong.idsinhvien = id;
                     thuePhongService.ThuePhong(thuePhong,id, idp, 1);
-                    return RedirectToAction("PhongList", "Phong");
+                    return RedirectToAction("Home", "Phong");
                 }
                 else
                 {
                     Console.WriteLine("Loai phong do la danh cho" + phong.loaiphong + "chu khong phai la " + sinhVien.gioitinh);
                 }
             }
-            return RedirectToAction("PhongList", "Phong");
+            return RedirectToAction("Home", "Phong");
         }
 
         [HttpPost]

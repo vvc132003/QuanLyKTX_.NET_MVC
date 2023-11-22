@@ -127,3 +127,29 @@ h3 {
     .collapse.show {
         display: block;
     }
+.text-center {
+    text-align: center !important;
+}
+
+.square {
+    width: 200px;
+    height: 40px;
+    text-align: center;
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+    /* Định dạng cho nội dung văn bản trong ô vuông */
+    .square a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        display: block;
+        padding: 10px;
+        line-height: 1.5;
+        /* Điều chỉnh giá trị này để căn chữ theo chiều dọc */
+        text-align: center;
+        /* Để căn chữ theo chiều ngang vào giữa ô vuông */
+    }

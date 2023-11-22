@@ -28,12 +28,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmdcR2V0QWxsU3R1ZGVudHNJRFBob25nLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vvc13/source/repos/QuanLyKyTucXa_MVC/QuanLyKyTucXa_MVC/Views/Phong/PhongCreate.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmdcUGhvbmdDcmVhdGUuY3NodG1s
+[C:/Users/vvc13/source/repos/QuanLyKyTucXa_MVC/QuanLyKyTucXa_MVC/Views/Phong/Home.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmdcSG9tZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/vvc13/source/repos/QuanLyKyTucXa_MVC/QuanLyKyTucXa_MVC/Views/Phong/PhongList.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmdcUGhvbmdMaXN0LmNzaHRtbA==
+[C:/Users/vvc13/source/repos/QuanLyKyTucXa_MVC/QuanLyKyTucXa_MVC/Views/Phong/PhongCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGhvbmdcUGhvbmdDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/vvc13/source/repos/QuanLyKyTucXa_MVC/QuanLyKyTucXa_MVC/Views/SinhVien/SinhVienChuyenPhong.cshtml]
