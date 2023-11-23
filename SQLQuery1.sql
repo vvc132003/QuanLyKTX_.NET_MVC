@@ -1,4 +1,5 @@
-﻿
+﻿CREATE DATABASE QuanLyKTX;
+USE QuanLyKTX;
 -- Bảng Người Dùng
 CREATE TABLE NguoiDung (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -29,7 +30,9 @@ CREATE TABLE SinhVien (
     sodienthoai NVARCHAR(20),
     idphong INT,
     gioitinh NVARCHAR(10),
-    quequan NVARCHAR(255),
+    tinh NVARCHAR(255),
+    quan NVARCHAR(255),
+    phuong NVARCHAR(255),
     trang_thai NVARCHAR(20),
     solanvipham INT,
     ngayvao DATE,

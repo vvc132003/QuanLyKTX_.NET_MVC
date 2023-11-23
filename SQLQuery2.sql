@@ -119,15 +119,17 @@ CREATE PROCEDURE ThemSinhVienS
     @sodienthoai NVARCHAR(20),
     @idphong INT,
     @gioitinh NVARCHAR(10),
-    @quequan NVARCHAR(255),
-    @trang_thai NVARCHAR(20),
+	@tinh NVARCHAR(255),
+	@quan NVARCHAR(255),
+	@phuong NVARCHAR(255), 
+	@trang_thai NVARCHAR(20),
     @solanvipham INT,
     @ngayvao DATE,
     @ngaysinh DATE
 AS
 BEGIN
-	INSERT INTO SinhVien (id,tensinhvien, khoahoc, nganhhoc, email, sodienthoai, idphong, gioitinh, quequan,trang_thai,solanvipham, ngayvao, ngaysinh) 
-    VALUES (@id,@tensinhvien, @khoahoc, @nganhhoc, @email, @sodienthoai, @idphong, @gioitinh, @quequan,@trang_thai,@solanvipham, @ngayvao, @ngaysinh)
+	INSERT INTO SinhVien (id,tensinhvien, khoahoc, nganhhoc, email, sodienthoai, idphong, gioitinh, tinh,quan,phuong,trang_thai,solanvipham, ngayvao, ngaysinh) 
+    VALUES (@id,@tensinhvien, @khoahoc, @nganhhoc, @email, @sodienthoai, @idphong, @gioitinh, @tinh,@quan,@phuong,@trang_thai,@solanvipham, @ngayvao, @ngaysinh)
 END
 
 --- cập nhật sinh viên
@@ -140,15 +142,17 @@ CREATE PROCEDURE UpdateSinhViens
     @sodienthoai NVARCHAR(20),
     @idphong INT,
     @gioitinh NVARCHAR(10),
-    @quequan NVARCHAR(255),
-    @trang_thai NVARCHAR(20),
+	@tinh NVARCHAR(255),
+	@quan NVARCHAR(255),
+	@phuong NVARCHAR(255), 
+	@trang_thai NVARCHAR(20),
     @solanvipham INT,
     @ngayvao DATE,
     @ngaysinh DATE
 AS
 BEGIN
     UPDATE SinhVien SET tensinhvien = @tensinhvien, khoahoc = @khoahoc, nganhhoc = @nganhhoc, 
-    email = @email, sodienthoai = @sodienthoai, gioitinh = @gioitinh, quequan = @quequan , 
+    email = @email, sodienthoai = @sodienthoai, gioitinh = @gioitinh, tinh = @tinh ,quan = @quan , phuong = @phuong ,  
     ngayvao = @ngayvao, ngaysinh = @ngaysinh WHERE id = @id
 END
 

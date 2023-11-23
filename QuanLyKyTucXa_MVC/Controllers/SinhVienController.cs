@@ -61,7 +61,7 @@ namespace QuanLyKyTucXa_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult ThuePhong(SinhVien sinhVien,ThuePhong thuePhong, string id, int idp)
+        public IActionResult ThuePhong(SinhVien sinhVien,ThuePhong thuePhong, int idp)
         {
             Phong phong = phongService.LayPhongTheoMa(idp);
             if (phong != null && phong.songuoio < phong.sogiuong)
@@ -75,8 +75,8 @@ namespace QuanLyKyTucXa_MVC.Controllers
                     sinhVienService.ThemSinhVien(sinhVien);
                     phongService.CapNhatSoNguoiO(phong, phong.songuoio + 1);
                     thuePhong.trangthai = "Đã thuê";
-                    thuePhong.idsinhvien = id;
-                    thuePhongService.ThuePhong(thuePhong,id, idp, 1);
+                    thuePhongService.ThuePhong(thuePhong, sinhVien.id, idp, 1);
+                    TempData["thuephongthanhcong"] = "Thuê phòng thành công!";
                     return RedirectToAction("Home", "Phong");
                 }
                 else

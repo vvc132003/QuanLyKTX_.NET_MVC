@@ -48,7 +48,17 @@ namespace QuanLyKyTucXa_MVC.Controllers
         public IActionResult GetAllStudentsIDPhong(int id)
         {
             List<SinhVien> sinhviens = sinhVienService.GetAllStudentsIDPhong(id);
-            return View(sinhviens);
+            List<Modeldata> modeldataList = new List<Modeldata>();
+            foreach (var sinhVien in sinhviens)
+            {
+                Modeldata modeldata = new Modeldata
+                {
+                    sinhVien = sinhVien 
+                };
+                modeldataList.Add(modeldata);
+            }
+            return View(modeldataList); 
         }
+
     }
 }

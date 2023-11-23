@@ -17,7 +17,9 @@ namespace QuanLyKyTucXa_MVC.Models
         public string sodienthoai { get; set; }
         public int idphong { get; set; }
         public string gioitinh { get; set; }
-        public string quequan { get; set; }
+        public string tinh { get; set; }
+        public string quan { get; set; }
+        public string phuong { get; set; }
         public string trang_thai { get; set; }
         public int solanvipham { get; set; }
         public DateTime ngayvao { get; set; }
@@ -51,8 +53,7 @@ namespace QuanLyKyTucXa_MVC.Models
             Console.Write("Giới tính: ");
             gioitinh = Console.ReadLine();
 
-            Console.Write("Quê quán: ");
-            quequan = Console.ReadLine();
+           
 
             Console.Write("Ngày sinh (MM/dd/yyyy): ");
             ngaysinh = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
@@ -61,15 +62,6 @@ namespace QuanLyKyTucXa_MVC.Models
             Console.Write("Ngay vao (MM/dd/yyyy): ");
             ngayvao = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
         }
-        public void HienThiThongTinSinhVien()
-        {
-            Console.WriteLine($"|{id,-8}|{tensinhvien,-15}|{khoahoc,-11}|{nganhhoc,-20}|{email,-25}|{sodienthoai,-17}|{idphong,-11}|{gioitinh,-13}|{quequan,-16}|{trang_thai,-19}|{solanvipham,-21}|{ngayvao:d,-19}|{ngaysinh:d,-17}|");
-        }
-        public void HienThiTieuDeSinhVien()
-        {
-            Console.WriteLine("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine("|    ID    |       Ten       |  Khoa Hoc  |     Nganh Hoc     |          Email          |   So Đien Thoai   |  ID Phong  |  Gioi Tinh  |    Que Quan    |     Trang Thai     |   So Lan Vi Pham   |   Ngay Nhap Hoc   |    Ngay Sinh    |");
-            Console.WriteLine("-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
-        }
+      
     }
 }

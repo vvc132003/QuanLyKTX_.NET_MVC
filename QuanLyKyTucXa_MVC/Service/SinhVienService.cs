@@ -30,7 +30,9 @@ namespace QuanLyKyTucXa_MVC.Service
                             sodienthoai = reader["sodienthoai"].ToString(),
                             idphong = (int)reader["idphong"],
                             gioitinh = reader["gioitinh"].ToString(),
-                            quequan = reader["quequan"].ToString(),
+                            tinh = reader["tinh"].ToString(),
+                            quan = reader["tinh"].ToString(),
+                            phuong = reader["tinh"].ToString(),
                             trang_thai = reader["trang_thai"].ToString(),
                             solanvipham = (int)reader["solanvipham"],
                             ngayvao = (DateTime)reader["ngayvao"],
@@ -73,7 +75,9 @@ namespace QuanLyKyTucXa_MVC.Service
                 command.Parameters.AddWithValue("@sodienthoai", sinhVien.sodienthoai);
                 command.Parameters.AddWithValue("@idphong", sinhVien.idphong);
                 command.Parameters.AddWithValue("@gioitinh", sinhVien.gioitinh);
-                command.Parameters.AddWithValue("@quequan", sinhVien.quequan);
+                command.Parameters.AddWithValue("@tinh", sinhVien.tinh);
+                command.Parameters.AddWithValue("@quan", sinhVien.quan);
+                command.Parameters.AddWithValue("@phuong", sinhVien.phuong);
                 command.Parameters.AddWithValue("@trang_thai", sinhVien.trang_thai);
                 command.Parameters.AddWithValue("@solanvipham", sinhVien.solanvipham);
                 command.Parameters.AddWithValue("@ngayvao", sinhVien.ngayvao);
@@ -98,7 +102,9 @@ namespace QuanLyKyTucXa_MVC.Service
                 command.Parameters.AddWithValue("@sodienthoai", sinhVien.sodienthoai);
                 command.Parameters.AddWithValue("@idphong", sinhVien.idphong);
                 command.Parameters.AddWithValue("@gioitinh", sinhVien.gioitinh);
-                command.Parameters.AddWithValue("@quequan", sinhVien.quequan);
+                command.Parameters.AddWithValue("@tinh", sinhVien.tinh);
+                command.Parameters.AddWithValue("@quan", sinhVien.quan);
+                command.Parameters.AddWithValue("@phuong", sinhVien.phuong);
                 command.Parameters.AddWithValue("@ngayvao", sinhVien.ngayvao);
                 command.Parameters.AddWithValue("@ngaysinh", sinhVien.ngaysinh);
                 command.Parameters.AddWithValue("@id", sinhVien.id);
@@ -195,7 +201,9 @@ namespace QuanLyKyTucXa_MVC.Service
                         sodienthoai = reader["sodienthoai"].ToString(),
                         idphong = (int)reader["idphong"],
                         gioitinh = reader["gioitinh"].ToString(),
-                        quequan = reader["quequan"].ToString(),
+                        tinh = reader["tinh"].ToString(),
+                        quan = reader["quan"].ToString(),
+                        phuong = reader["phuong"].ToString(),
                         trang_thai = reader["trang_thai"].ToString(),
                         solanvipham = (int)reader["solanvipham"],
                         ngayvao = (DateTime)reader["ngayvao"],
@@ -230,7 +238,9 @@ namespace QuanLyKyTucXa_MVC.Service
                             sodienthoai = reader["sodienthoai"].ToString(),
                             idphong = (int)reader["idphong"],
                             gioitinh = reader["gioitinh"].ToString(),
-                            quequan = reader["quequan"].ToString(),
+                            tinh = reader["tinh"].ToString(),
+                            quan = reader["quan"].ToString(),
+                            phuong = reader["phuong"].ToString(),
                             trang_thai = reader["trang_thai"].ToString(),
                             solanvipham = (int)reader["solanvipham"],
                             ngayvao = (DateTime)reader["ngayvao"],
@@ -264,7 +274,9 @@ namespace QuanLyKyTucXa_MVC.Service
                             sodienthoai = reader["sodienthoai"].ToString(),
                             idphong = (int)reader["idphong"],
                             gioitinh = reader["gioitinh"].ToString(),
-                            quequan = reader["quequan"].ToString(),
+                            tinh = reader["tinh"].ToString(),
+                            quan = reader["quan"].ToString(),
+                            phuong = reader["phuong"].ToString(),
                             trang_thai = reader["trang_thai"].ToString(),
                             solanvipham = (int)reader["solanvipham"],
                             ngayvao = (DateTime)reader["ngayvao"],
@@ -299,7 +311,9 @@ namespace QuanLyKyTucXa_MVC.Service
                             sodienthoai = reader["sodienthoai"].ToString(),
                             idphong = (int)reader["idphong"],
                             gioitinh = reader["gioitinh"].ToString(),
-                            quequan = reader["quequan"].ToString(),
+                            tinh = reader["tinh"].ToString(),
+                            quan = reader["quan"].ToString(),
+                            phuong = reader["phuong"].ToString(),
                             trang_thai = reader["trang_thai"].ToString(),
                             solanvipham = (int)reader["solanvipham"],
                             ngayvao = (DateTime)reader["ngayvao"],
@@ -346,7 +360,9 @@ namespace QuanLyKyTucXa_MVC.Service
                                 sodienthoai = reader["sodienthoai"].ToString(),
                                 idphong = (int)reader["idphong"],
                                 gioitinh = reader["gioitinh"].ToString(),
-                                quequan = reader["quequan"].ToString(),
+                                tinh = reader["tinh"].ToString(),
+                                quan = reader["quan"].ToString(),
+                                phuong = reader["phuong"].ToString(),
                                 trang_thai = reader["trang_thai"].ToString(),
                                 solanvipham = (int)reader["solanvipham"],
                                 ngayvao = (DateTime)reader["ngayvao"],
