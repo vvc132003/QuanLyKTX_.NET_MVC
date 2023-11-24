@@ -113,25 +113,23 @@ namespace QuanLyKyTucXa_MVC.Service
             connection.Close();
         }
 
-        public void UpdateTrangThaiStudent(SinhVien student, string masv)
+        public void UpdateTrangThaiStudent(SinhVien student)
         {
-            connection.Open();
-            using (SqlCommand command = new SqlCommand("UpdateTrangThaiStudents", connection))
+            using (SqlConnection connection = DBUtils.GetDBConnection())
             {
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@trang_thai", student.trang_thai);
-                command.Parameters.AddWithValue("@id", masv);
-                command.ExecuteNonQuery();
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("UpdateTrangThaiStudents", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@trang_thai", student.trang_thai);
+                    command.Parameters.AddWithValue("@id", student.id);
+                    command.ExecuteNonQuery();
+                }
             }
-            connection.Close();
         }
 
-        public Tuple<int, DateTime, string, int> LayThongTinPhongVaNgayThue(string idsv)
+        public SinhVien LayThongTinPhongVaNgayThue(string idsv)
         {
-            int idphong = 0;
-            int solanvipham = 0;
-            DateTime ngayvao = DateTime.MinValue;
-            string gioitinh = string.Empty;
             connection.Open();
             string query = "SELECT idphong,ngayvao,gioitinh,solanvipham FROM SinhVien WHERE id = @id";
             using (SqlCommand command = new SqlCommand(query, connection))
@@ -141,15 +139,22 @@ namespace QuanLyKyTucXa_MVC.Service
                 {
                     if (reader.Read())
                     {
-                        idphong = (int)reader["idphong"];
-                        ngayvao = (DateTime)reader["ngayvao"];
-                        gioitinh = reader["gioitinh"].ToString();
-                        solanvipham = (int)reader["solanvipham"];
+                        SinhVien sinhVien = new SinhVien
+                        {
+                            idphong = (int)reader["idphong"],
+                            ngayvao = (DateTime)reader["ngayvao"],
+                            gioitinh = reader["gioitinh"].ToString(),
+                            solanvipham = (int)reader["solanvipham"]
+                        };
+                        return sinhVien;
+                    }
+                     else
+                    {
+                        return null;
                     }
                 }
             }
             connection.Close();
-            return Tuple.Create(idphong, ngayvao, gioitinh, solanvipham);
         }
 
         public void CapNhatPhongChoSinhVien(string id, int idphong)

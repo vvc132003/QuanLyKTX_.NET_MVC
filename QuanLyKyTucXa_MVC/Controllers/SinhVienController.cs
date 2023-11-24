@@ -10,36 +10,18 @@ namespace QuanLyKyTucXa_MVC.Controllers
         private readonly TraPhongService traPhongService;
         private readonly PhongService phongService;
         private readonly ThuePhongService thuePhongService;
+        private readonly ChuyenPhongService chuyenPhongService;
 
-        public SinhVienController(SinhVienService sinhVienServices, TraPhongService traPhongServices, PhongService phongServices, ThuePhongService thuePhongServices)
+        public SinhVienController(SinhVienService sinhVienServices, TraPhongService traPhongServices, PhongService phongServices, ThuePhongService thuePhongServices, ChuyenPhongService chuyenPhongServices)
         {
             sinhVienService = sinhVienServices;
             traPhongService = traPhongServices;
-            phongService = phongServices;   
+            phongService = phongServices;
             thuePhongService = thuePhongServices;
-        }
-       
-        [HttpGet]
-        public IActionResult SinhVienChuyenPhong(string id)
-        {
-            SinhVien sinhvien = sinhVienService.SinhVienGteById(id);
-            return View("SinhVienChuyenPhong", sinhvien);
-        }
-        [HttpGet]
-        public IActionResult SinhVienTraPhong(string id)
-        {
-            SinhVien sinhvien = sinhVienService.SinhVienGteById(id);
-            TraPhong traphong = new TraPhong();
-
-            Modeldata yourModel = new Modeldata
-            {
-                sinhVien = sinhvien,
-                traPhong = traphong
-            };
-
-            return View("SinhVienTraPhong", yourModel);
+            chuyenPhongService = chuyenPhongServices;
         }
 
+        /// thuê phòng
         public IActionResult SinhVienThuePhong(int id)
         {
             if (HttpContext.Session.GetInt32("id") != null && HttpContext.Session.GetString("tendangnhap") != null)
@@ -66,7 +48,7 @@ namespace QuanLyKyTucXa_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult ThuePhong(SinhVien sinhVien,ThuePhong thuePhong, int idp, int idphong)
+        public IActionResult ThuePhong(SinhVien sinhVien,ThuePhong thuePhong, int idp, int idnguoidung)
         {
             if (HttpContext.Session.GetInt32("id") != null && HttpContext.Session.GetString("tendangnhap") != null)
             {
@@ -82,7 +64,7 @@ namespace QuanLyKyTucXa_MVC.Controllers
                         sinhVienService.ThemSinhVien(sinhVien);
                         phongService.CapNhatSoNguoiO(phong, phong.songuoio + 1);
                         thuePhong.trangthai = "Đã thuê";
-                        thuePhongService.ThuePhong(thuePhong, sinhVien.id, idp, idphong);
+                        thuePhongService.ThuePhong(thuePhong, sinhVien.id, idp, idnguoidung);
                         TempData["thuephongthanhcong"] = "Thuê phòng thành công!";
                         return RedirectToAction("Home", "Phong");
                     }
@@ -99,20 +81,122 @@ namespace QuanLyKyTucXa_MVC.Controllers
             return RedirectToAction("SinhVienThuePhong", "SinhVien");
         }
 
-        [HttpPost]
-        public IActionResult TraPhong(string id)
+        /// chuyển phòng
+        [HttpGet]
+        public IActionResult SinhVienChuyenPhong(string id)
         {
-            SinhVien sinhvien = new SinhVien();
-            TraPhong traphong = new TraPhong();
-            Tuple<int, DateTime, string, int> sts = sinhVienService.LayThongTinPhongVaNgayThue(id);
-            int idphong = sts.Item1;
-            int idnguoidung3 = 1;
-            sinhvien.trang_thai = "Đã trả";
-            sinhVienService.UpdateTrangThaiStudent(sinhvien, id);
-            Phong phongupdates = phongService.LayPhongTheoMa(idphong);
-            phongService.CapNhatSoNguoiO(phongupdates, phongupdates.songuoio - 1);
-            traPhongService.TraPhong(traphong, idphong, id, idnguoidung3);
-            return RedirectToAction("PhongList","PhongController");
+            if (HttpContext.Session.GetInt32("id") != null && HttpContext.Session.GetString("tendangnhap") != null)
+            {
+                SinhVien sinhvien = sinhVienService.SinhVienGteById(id);
+                ChuyenPhong chuyenPhong = new ChuyenPhong();
+                List<Phong> danhSachPhong = phongService.GetAllPhong();
+                if (danhSachPhong != null && danhSachPhong.Count > 0)
+                {
+                    Modeldata yourModel = new Modeldata
+                    {
+                        sinhVien = sinhvien,
+                        chuyenPhong = chuyenPhong,
+                        phongs = danhSachPhong
+                    };
+                    int idnd = HttpContext.Session.GetInt32("id").Value;
+                    string tendangnhap = HttpContext.Session.GetString("tendangnhap");
+                    ViewData["id"] = idnd;
+                    ViewData["tendangnhap"] = tendangnhap;
+                    return View("SinhVienChuyenPhong", yourModel);
+                }
+                else
+                {
+                    return RedirectToAction("DangNhap", "DangNhap");
+                }
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "DangNhap");
+            }
+        }
+
+
+
+        [HttpPost]
+        public IActionResult ChuyenPhong(ChuyenPhong chuyenPhong , string masv, int idnguoidung, int idphongmoi)
+        {
+            if (HttpContext.Session.GetInt32("id") != null && HttpContext.Session.GetString("tendangnhap") != null)
+            {
+                Phong phongmoi = phongService.LayPhongTheoMa(idphongmoi);
+                SinhVien sinhvien = sinhVienService.LayThongTinPhongVaNgayThue(masv);
+                if (phongmoi != null && phongmoi.songuoio < phongmoi.sogiuong)
+                {
+                    if (phongmoi.loaiphong == sinhvien.gioitinh)
+                    {
+                        if (sinhvien.idphong != 0 && (chuyenPhong.ngaychuyen.Month >= sinhvien.ngayvao.Month
+                                               || (chuyenPhong.ngaychuyen.Month == sinhvien.ngayvao.Month
+                                               && chuyenPhong.ngaychuyen.Day >= sinhvien.ngayvao.Day)))
+                        {
+                            Phong phongupdatecu = phongService.LayPhongTheoMa(sinhvien.idphong);
+                            phongService.CapNhatSoNguoiO(phongmoi, idphongmoi + 1);
+                            phongService.CapNhatSoNguoiO(phongupdatecu, phongupdatecu.songuoio - 1);
+                            chuyenPhongService.ChuyenPhong(chuyenPhong, sinhvien.idphong, idphongmoi, masv, idnguoidung);
+                            sinhVienService.CapNhatPhongChoSinhVien(masv, idphongmoi);
+                            TempData["chuyenphongthanhcong"] = "Chuyển phòng thành công!";
+                            return RedirectToAction("Home", "Phong");
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "DangNhap");
+            }
+            return RedirectToAction("SinhVienChuyenPhong", "SinhVien");
+        }
+
+
+        /// trả phòng
+        [HttpGet]
+        public IActionResult SinhVienTraPhong(string id)
+        {
+            if (HttpContext.Session.GetInt32("id") != null && HttpContext.Session.GetString("tendangnhap") != null)
+            {
+                SinhVien sinhvien = sinhVienService.SinhVienGteById(id);
+                TraPhong traphong = new TraPhong();
+
+                Modeldata yourModel = new Modeldata
+                {
+                    sinhVien = sinhvien,
+                    traPhong = traphong
+                };
+                int idnd = HttpContext.Session.GetInt32("id").Value;
+                string tendangnhap = HttpContext.Session.GetString("tendangnhap");
+                ViewData["id"] = idnd;
+                ViewData["tendangnhap"] = tendangnhap;
+                return View("SinhVienTraPhong", yourModel);
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "DangNhap");
+            }
+        }
+
+
+        [HttpPost]
+        public IActionResult TraPhong(TraPhong traphong, string masv, int idnguoidung)
+        {
+            if (HttpContext.Session.GetInt32("id") != null && HttpContext.Session.GetString("tendangnhap") != null)
+            {
+                SinhVien sinhvien = sinhVienService.LayThongTinPhongVaNgayThue(masv);
+                sinhvien.id = masv;
+                sinhvien.trang_thai = "Đã trả";
+                sinhVienService.UpdateTrangThaiStudent(sinhvien);
+                Phong phongupdates = phongService.LayPhongTheoMa(sinhvien.idphong);
+                phongService.CapNhatSoNguoiO(phongupdates, phongupdates.songuoio - 1);
+                traPhongService.TraPhong(traphong, sinhvien.idphong, masv, idnguoidung);
+                TempData["traphongthanhcong"] = "Trả phòng thành công!";
+                return RedirectToAction("Home", "Phong");
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "DangNhap");
+            }
         }
     }
 }

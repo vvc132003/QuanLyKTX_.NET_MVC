@@ -2,6 +2,7 @@
 {
     public class Modeldata
     {
+        public List<Phong> phongs { get; set; }
         public Phong phong { get; set; }
         public SinhVien sinhVien { get; set; }
         public NguoiDung nguoiDung { get; set; }

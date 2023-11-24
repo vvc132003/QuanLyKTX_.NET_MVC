@@ -4,6 +4,6 @@ namespace QuanLyKyTucXa_MVC.Repository
 {
     public interface ChuyenPhongRepository
     {
-        void ChuyenPhong(ChuyenPhong chuyenPhong, int idphongcu, int idphongmoi);
+        void ChuyenPhong(ChuyenPhong chuyenPhong, int idphongcu, int idphongmoi, string masv, int idnguoidung);
     }
 }
