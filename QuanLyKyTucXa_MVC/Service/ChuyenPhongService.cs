@@ -12,19 +12,21 @@ namespace QuanLyKyTucXa_MVC.Service
 
         public void ChuyenPhong(ChuyenPhong chuyenPhong, int idphongcu, int idphongmoi, string masv, int idnguoidung)
         {
-            connection.Open();
-            using (SqlCommand command = new SqlCommand("ChuyenPhongs", connection))
+            using (SqlConnection connection = DBUtils.GetDBConnection())
             {
-                command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@idsinhvien", masv);
-                command.Parameters.AddWithValue("@idnguoidung", idnguoidung);
-                command.Parameters.AddWithValue("@idphongcu", idphongcu);
-                command.Parameters.AddWithValue("@idphongmoi", idphongmoi);
-                command.Parameters.AddWithValue("@lydo", chuyenPhong.lydo);
-                command.Parameters.AddWithValue("@ngaychuyen", chuyenPhong.ngaychuyen);
-                command.ExecuteNonQuery();
+                connection.Open();
+                using (SqlCommand command = new SqlCommand("ChuyenPhongs", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@idsinhvien", masv);
+                    command.Parameters.AddWithValue("@idnguoidung", idnguoidung);
+                    command.Parameters.AddWithValue("@idphongcu", idphongcu);
+                    command.Parameters.AddWithValue("@idphongmoi", idphongmoi);
+                    command.Parameters.AddWithValue("@lydo", chuyenPhong.lydo);
+                    command.Parameters.AddWithValue("@ngaychuyen", chuyenPhong.ngaychuyen);
+                    command.ExecuteNonQuery();
+                }
             }
-            connection.Close();
         }
     }
 }

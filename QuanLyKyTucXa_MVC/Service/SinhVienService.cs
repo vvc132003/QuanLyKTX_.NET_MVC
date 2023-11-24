@@ -159,30 +159,35 @@ namespace QuanLyKyTucXa_MVC.Service
 
         public void CapNhatPhongChoSinhVien(string id, int idphong)
         {
-            connection.Open();
-            string updateQuery = "UPDATE SinhVien SET idphong = @idphong WHERE id = @id";
-            using (SqlCommand command = new SqlCommand(updateQuery, connection))
+            using (SqlConnection connection = DBUtils.GetDBConnection())
             {
-                command.Parameters.AddWithValue("@idphong", idphong);
-                command.Parameters.AddWithValue("@id", id);
-                command.ExecuteNonQuery();
-                connection.Close();
+                connection.Open();
+                string updateQuery = "UPDATE SinhVien SET idphong = @idphong WHERE id = @id";
+                using (SqlCommand command = new SqlCommand(updateQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@idphong", idphong);
+                    command.Parameters.AddWithValue("@id", id);
+                    command.ExecuteNonQuery();
 
+                }
             }
         }
 
         public void CapNhatSoLanViPhamChoSinhVien(string id, int solanvipham)
         {
-            connection.Open();
-            string updateQuery = "UPDATE SinhVien SET solanvipham  = @solanvipham  WHERE id = @id";
-            using (SqlCommand command = new SqlCommand(updateQuery, connection))
+            using (SqlConnection connection = DBUtils.GetDBConnection())
             {
-                command.Parameters.AddWithValue("@solanvipham ", solanvipham);
-                command.Parameters.AddWithValue("@id", id);
-                command.ExecuteNonQuery();
-                connection.Close();
+                connection.Open();
+                string updateQuery = "UPDATE SinhVien SET solanvipham  = @solanvipham  WHERE id = @id";
+                using (SqlCommand command = new SqlCommand(updateQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@solanvipham ", solanvipham);
+                    command.Parameters.AddWithValue("@id", id);
+                    command.ExecuteNonQuery();
+                }
             }
         }
+    
 
 
         public List<SinhVien> TimKiemSinhVienTheoTen(string tensinhvien)

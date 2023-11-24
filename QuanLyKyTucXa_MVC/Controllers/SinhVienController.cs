@@ -133,7 +133,7 @@ namespace QuanLyKyTucXa_MVC.Controllers
                                                && chuyenPhong.ngaychuyen.Day >= sinhvien.ngayvao.Day)))
                         {
                             Phong phongupdatecu = phongService.LayPhongTheoMa(sinhvien.idphong);
-                            phongService.CapNhatSoNguoiO(phongmoi, idphongmoi + 1);
+                            phongService.CapNhatSoNguoiO(phongmoi, phongmoi.songuoio + 1);
                             phongService.CapNhatSoNguoiO(phongupdatecu, phongupdatecu.songuoio - 1);
                             chuyenPhongService.ChuyenPhong(chuyenPhong, sinhvien.idphong, idphongmoi, masv, idnguoidung);
                             sinhVienService.CapNhatPhongChoSinhVien(masv, idphongmoi);
