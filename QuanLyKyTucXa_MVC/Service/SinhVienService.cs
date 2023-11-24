@@ -127,36 +127,39 @@ namespace QuanLyKyTucXa_MVC.Service
                 }
             }
         }
-
-        public SinhVien LayThongTinPhongVaNgayThue(string idsv)
+        public SinhVien SinhVienGteById(string id)
         {
-            connection.Open();
-            string query = "SELECT idphong,ngayvao,gioitinh,solanvipham FROM SinhVien WHERE id = @id";
-            using (SqlCommand command = new SqlCommand(query, connection))
+            using (SqlConnection connection = DBUtils.GetDBConnection())
             {
-                command.Parameters.AddWithValue("@id", idsv);
-                using (SqlDataReader reader = command.ExecuteReader())
+                connection.Open();
+                string query = "SELECT id,idphong,ngayvao,gioitinh,solanvipham,tensinhvien FROM SinhVien WHERE id = @id";
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    if (reader.Read())
+                    command.Parameters.AddWithValue("@id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        SinhVien sinhVien = new SinhVien
+                        if (reader.Read())
                         {
-                            idphong = (int)reader["idphong"],
-                            ngayvao = (DateTime)reader["ngayvao"],
-                            gioitinh = reader["gioitinh"].ToString(),
-                            solanvipham = (int)reader["solanvipham"]
-                        };
-                        return sinhVien;
-                    }
-                     else
-                    {
-                        return null;
+                            SinhVien sinhVien = new SinhVien
+                            {
+                                id = reader["id"].ToString(),
+                                idphong = (int)reader["idphong"],
+                                ngayvao = (DateTime)reader["ngayvao"],
+                                gioitinh = reader["gioitinh"].ToString(),
+                                solanvipham = (int)reader["solanvipham"],
+                                tensinhvien = reader["tensinhvien"].ToString(),
+                            };
+                            return sinhVien;
+                        }
+                        else
+                        {
+                            return null;
+                        }
                     }
                 }
             }
-            connection.Close();
         }
-
+       
         public void CapNhatPhongChoSinhVien(string id, int idphong)
         {
             using (SqlConnection connection = DBUtils.GetDBConnection())
@@ -387,32 +390,6 @@ namespace QuanLyKyTucXa_MVC.Service
         }
 
 
-        public SinhVien SinhVienGteById(string id)
-        {
-            using (SqlConnection connection = DBUtils.GetDBConnection())
-            {
-                connection.Open();
-                string sql = "SELECT id,tensinhvien,idphong FROM SinhVien WHERE id = @id";
-                using (SqlCommand command = new SqlCommand(sql, connection))
-                {
-                    command.Parameters.AddWithValue("@id", id);
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            SinhVien student = new SinhVien();
-                            student.id = reader["id"].ToString();
-                            student.tensinhvien = reader["tensinhvien"].ToString();
-                            student.idphong = (int)reader["idphong"];
-                            return student;
-                        }
-                        else
-                        {
-                            return null;
-                        }
-                    }
-                }
-            }
-        }
+       
     }
 }

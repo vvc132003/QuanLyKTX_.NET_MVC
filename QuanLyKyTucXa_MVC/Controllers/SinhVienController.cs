@@ -55,23 +55,36 @@ namespace QuanLyKyTucXa_MVC.Controllers
                 Phong phong = phongService.LayPhongTheoMa(idp);
                 if (phong != null && phong.songuoio < phong.sogiuong)
                 {
-                    if (phong.loaiphong == sinhVien.gioitinh && sinhVien.ngaysinh.Day < sinhVien.ngayvao.Day ||
-                        sinhVien.ngaysinh.Month < sinhVien.ngayvao.Month)
+                    if (phong.loaiphong == sinhVien.gioitinh)
                     {
-                        sinhVien.idphong = idp;
-                        sinhVien.solanvipham = 0;
-                        sinhVien.trang_thai = "Đã thuê";
-                        sinhVienService.ThemSinhVien(sinhVien);
-                        phongService.CapNhatSoNguoiO(phong, phong.songuoio + 1);
-                        thuePhong.trangthai = "Đã thuê";
-                        thuePhongService.ThuePhong(thuePhong, sinhVien.id, idp, idnguoidung);
-                        TempData["thuephongthanhcong"] = "Thuê phòng thành công!";
-                        return RedirectToAction("Home", "Phong");
+                        if(sinhVien.ngaysinh.Day < sinhVien.ngayvao.Day ||
+                        sinhVien.ngaysinh.Month < sinhVien.ngayvao.Month)
+                        {
+                            sinhVien.idphong = idp;
+                            sinhVien.solanvipham = 0;
+                            sinhVien.trang_thai = "Đã thuê";
+                            sinhVienService.ThemSinhVien(sinhVien);
+                            phongService.CapNhatSoNguoiO(phong, phong.songuoio + 1);
+                            thuePhong.trangthai = "Đã thuê";
+                            thuePhongService.ThuePhong(thuePhong, sinhVien.id, idp, idnguoidung);
+                            TempData["thuephongthanhcong"] = "Thuê phòng thành công!";
+                            return RedirectToAction("Home", "Phong");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Loai phong do la danh cho" + phong.loaiphong + "chu khong phai la " + sinhVien.gioitinh);
+                            return RedirectToAction("SinhVienThuePhong", "SinhVien");
+                        }
                     }
                     else
                     {
-                        Console.WriteLine("Loai phong do la danh cho" + phong.loaiphong + "chu khong phai la " + sinhVien.gioitinh);
+                        TempData["loigioitinh"] = "";
+                        return RedirectToAction("SinhVienThuePhong", "SinhVien");
                     }
+                }
+                else
+                {
+                    Console.WriteLine("Loai phong do la danh cho" + phong.loaiphong + "chu khong phai la " + sinhVien.gioitinh);
                 }
             }
             else
@@ -118,36 +131,48 @@ namespace QuanLyKyTucXa_MVC.Controllers
 
 
         [HttpPost]
-        public IActionResult ChuyenPhong(ChuyenPhong chuyenPhong , string masv, int idnguoidung, int idphongmoi)
+        public IActionResult ChuyenPhong(ChuyenPhong chuyenPhong, string id, int idnguoidung, int idphongmoi)
         {
             if (HttpContext.Session.GetInt32("id") != null && HttpContext.Session.GetString("tendangnhap") != null)
             {
                 Phong phongmoi = phongService.LayPhongTheoMa(idphongmoi);
-                SinhVien sinhvien = sinhVienService.LayThongTinPhongVaNgayThue(masv);
+                SinhVien sinhvien = sinhVienService.SinhVienGteById(id);
                 if (phongmoi != null && phongmoi.songuoio < phongmoi.sogiuong)
                 {
                     if (phongmoi.loaiphong == sinhvien.gioitinh)
                     {
-                        if (sinhvien.idphong != 0 && (chuyenPhong.ngaychuyen.Month >= sinhvien.ngayvao.Month
-                                               || (chuyenPhong.ngaychuyen.Month == sinhvien.ngayvao.Month
-                                               && chuyenPhong.ngaychuyen.Day >= sinhvien.ngayvao.Day)))
+                        if (sinhvien.idphong != 0 && (chuyenPhong.ngaychuyen >= sinhvien.ngayvao))
                         {
                             Phong phongupdatecu = phongService.LayPhongTheoMa(sinhvien.idphong);
                             phongService.CapNhatSoNguoiO(phongmoi, phongmoi.songuoio + 1);
                             phongService.CapNhatSoNguoiO(phongupdatecu, phongupdatecu.songuoio - 1);
-                            chuyenPhongService.ChuyenPhong(chuyenPhong, sinhvien.idphong, idphongmoi, masv, idnguoidung);
-                            sinhVienService.CapNhatPhongChoSinhVien(masv, idphongmoi);
-                            TempData["chuyenphongthanhcong"] = "Chuyển phòng thành công!";
+                            chuyenPhongService.ChuyenPhong(chuyenPhong, sinhvien.idphong, idphongmoi, id, idnguoidung);
+                            sinhVienService.CapNhatPhongChoSinhVien(id, idphongmoi);
+                            TempData["chuyenphongthanhcong"] = "";
                             return RedirectToAction("Home", "Phong");
                         }
+                        else
+                        {
+                            TempData["loichuyenphong"] = "";
+                            return RedirectToAction("SinhVienChuyenPhong", "SinhVien");
+                        }
                     }
+                    else
+                    {
+                        TempData["loichuyenphonggt"] = "loichuyenphonggt";
+                        return RedirectToAction("SinhVienChuyenPhong", "SinhVien");
+                    }
+                }
+                else
+                {
+                    TempData["loisonguoi"] = "";
+                    return RedirectToAction("SinhVienChuyenPhong", "SinhVien");
                 }
             }
             else
             {
                 return RedirectToAction("DangNhap", "DangNhap");
             }
-            return RedirectToAction("SinhVienChuyenPhong", "SinhVien");
         }
 
 
@@ -183,7 +208,7 @@ namespace QuanLyKyTucXa_MVC.Controllers
         {
             if (HttpContext.Session.GetInt32("id") != null && HttpContext.Session.GetString("tendangnhap") != null)
             {
-                SinhVien sinhvien = sinhVienService.LayThongTinPhongVaNgayThue(masv);
+                SinhVien sinhvien = sinhVienService.SinhVienGteById(masv);
                 sinhvien.id = masv;
                 sinhvien.trang_thai = "Đã trả";
                 sinhVienService.UpdateTrangThaiStudent(sinhvien);

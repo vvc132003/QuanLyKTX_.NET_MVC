@@ -99,3 +99,13 @@
         });
     </script>
 }
+@if (TempData["chuyenphongthanhcong"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Chuyển Phòng thành công!',
+            icon: 'success',
+            showConfirmButton: false,
+        });
+    </script>
+}

@@ -10,7 +10,6 @@ namespace QuanLyKyTucXa_MVC.Repository
         void ThemSinhVien(SinhVien sinhVien);
         void UpdateSinhVien(SinhVien sinhVien);
         void UpdateTrangThaiStudent(SinhVien student);
-        SinhVien LayThongTinPhongVaNgayThue(string idsv);
         void CapNhatPhongChoSinhVien(string id, int idphong);
         void CapNhatSoLanViPhamChoSinhVien(string id, int solanvipham);
         List<SinhVien> TimKiemSinhVienTheoTen(string tensinhvien);
