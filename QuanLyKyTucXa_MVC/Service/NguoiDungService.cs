@@ -11,35 +11,41 @@ namespace QuanLyKyTucXa_MVC.Service
 
         public NguoiDung CheckThongTinDangNhap(string matkhau, string tendangnhap)
         {
+            NguoiDung nguoiDung = null;
+
             if (connection.State == ConnectionState.Closed)
             {
                 connection.Open();
             }
+
             using (SqlCommand command = new SqlCommand("CheckThongTinDangNhap", connection))
             {
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@tendangnhap", tendangnhap);
                 command.Parameters.AddWithValue("@matkhau", matkhau);
+
                 using (SqlDataReader reader = command.ExecuteReader())
                 {
                     if (reader.Read())
                     {
-                        return new NguoiDung
+                        nguoiDung = new NguoiDung()
                         {
-                            tendangnhap = reader["tendangnhap"].ToString()
+                            id = (int)reader["id"],
+                            tendangnhap = reader["tendangnhap"].ToString(),
+                            hoten = reader["hoten"].ToString(),
                         };
-                    }
-                    else
-                    {
-                        return null;
                     }
                 }
             }
+
             if (connection.State == ConnectionState.Open)
             {
                 connection.Close();
             }
+
+            return nguoiDung;
         }
+
 
         public int LayIDNguoiDung(string tendangnhap)
         {

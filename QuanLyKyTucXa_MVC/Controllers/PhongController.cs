@@ -20,9 +20,21 @@ namespace QuanLyKyTucXa_MVC.Controllers
         [HttpGet]
         public IActionResult Home()
         {
-            List<Phong> Home = phongService.GetAllPhong();
-            return View(Home);
+            if (HttpContext.Session.GetInt32("id") != null && HttpContext.Session.GetString("hoten") != null)
+            {
+                int id = HttpContext.Session.GetInt32("id").Value;
+                string hoten = HttpContext.Session.GetString("hoten");
+                List<Phong> Home = phongService.GetAllPhong();
+                ViewData["id"] = id;
+                ViewData["hoten"] = hoten;
+                return View(Home);
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "DangNhap");
+            }
         }
+
 
         [HttpGet]
         public IActionResult PhongCreate()
