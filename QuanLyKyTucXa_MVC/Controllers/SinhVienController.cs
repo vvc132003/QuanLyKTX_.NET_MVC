@@ -72,26 +72,26 @@ namespace QuanLyKyTucXa_MVC.Controllers
                         }
                         else
                         {
-                            Console.WriteLine("Loai phong do la danh cho" + phong.loaiphong + "chu khong phai la " + sinhVien.gioitinh);
-                            return RedirectToAction("SinhVienThuePhong", "SinhVien");
+                            TempData["loigioitinh"] = "";
+                            return RedirectToAction("SinhVienThuePhong", "SinhVien", new { id = idp });
                         }
                     }
                     else
                     {
                         TempData["loigioitinh"] = "";
-                        return RedirectToAction("SinhVienThuePhong", "SinhVien");
+                        return RedirectToAction("SinhVienThuePhong", "SinhVien", new { id = idp });
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Loai phong do la danh cho" + phong.loaiphong + "chu khong phai la " + sinhVien.gioitinh);
+                    TempData["loisonguoi"] = "";
+                    return RedirectToAction("SinhVienThuePhong", "SinhVien", new { id = idp });
                 }
             }
             else
             {
                 return RedirectToAction("DangNhap", "DangNhap");
             }
-            return RedirectToAction("SinhVienThuePhong", "SinhVien");
         }
 
         /// chuyển phòng
@@ -154,19 +154,19 @@ namespace QuanLyKyTucXa_MVC.Controllers
                         else
                         {
                             TempData["loichuyenphong"] = "";
-                            return RedirectToAction("SinhVienChuyenPhong", "SinhVien");
+                            return RedirectToAction("SinhVienChuyenPhong", "SinhVien", new { id });
                         }
                     }
                     else
                     {
                         TempData["loichuyenphonggt"] = "loichuyenphonggt";
-                        return RedirectToAction("SinhVienChuyenPhong", "SinhVien");
+                        return RedirectToAction("SinhVienChuyenPhong", "SinhVien", new { id });
                     }
                 }
                 else
                 {
                     TempData["loisonguoi"] = "";
-                    return RedirectToAction("SinhVienChuyenPhong", "SinhVien");
+                    return RedirectToAction("SinhVienChuyenPhong", "SinhVien", new { id });
                 }
             }
             else

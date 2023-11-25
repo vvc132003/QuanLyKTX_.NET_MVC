@@ -50,7 +50,7 @@
                                 <div class="text-bg-success p-2">Thông tin sinh viên</div>
                                 <div class="border border-secondary-subtle" style="padding:10px 20px">
                                     <form action="/SinhVien/ThuePhong" method="POST">
-                                        <input type="hidden" id="idp" name="idp" value="@Model?.phong?.id" class="form-control" />
+                                        <input type="hidden" id="idp" name="idp" value="@Model?.phong.id"" class="form-control" />
                                         <input type="hidden" id="idnguoidung" name="idnguoidung" value="@ViewData["id"]" class="form-control" />
                                         <div class="row">
                                             <div class="col-6">
@@ -58,28 +58,28 @@
                                                     <label for="id" class="form-label">
                                                         Mã sinh viên:
                                                     </label>
-                                                    <input type="text" class="form-control" id="id" name="id" value="@Model.sinhVien.id">
+                                                    <input type="text" class="form-control" id="id" name="id" >
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="tensinhvien" class="form-label">
                                                         Tên sinh viên:
-                                                    </label> <input type="text" class="form-control" id="tensinhvien" name="tensinhvien" value="@Model.sinhVien.tensinhvien">
+                                                    </label> <input type="text" class="form-control" id="tensinhvien" name="tensinhvien" >
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="khoahoc" class="form-label">Khóa học:</label>
-                                                    <input type="text" class="form-control" id="khoahoc" name="khoahoc" value="@Model.sinhVien.khoahoc">
+                                                    <input type="text" class="form-control" id="khoahoc" name="khoahoc" >
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="nganhhoc" class="form-label">Ngành học:</label>
-                                                    <input type="text" class="form-control" id="nganhhoc" name="nganhhoc" value="@Model.sinhVien.nganhhoc">
+                                                    <input type="text" class="form-control" id="nganhhoc" name="nganhhoc" >
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="email" class="form-label">Email:</label>
-                                                    <input type="email" class="form-control" id="email" name="email" value="@Model.sinhVien.email">
+                                                    <input type="email" class="form-control" id="email" name="email" >
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="sodienthoai" class="form-label">Số điện thoại:</label>
-                                                    <input type="text" class="form-control" id="sodienthoai" name="sodienthoai" value="@Model.sinhVien.sodienthoai">
+                                                    <input type="text" class="form-control" id="sodienthoai" name="sodienthoai" >
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="gioitinh" class="form-label">Gioi tính:</label>
@@ -92,15 +92,15 @@
                                             <div class="col-6">
                                                 <div class="mb-3">
                                                     <label for="ngaysinh" class="form-label">Ngày sinh:</label>
-                                                    <input type="datetime-local" class="form-control" id="ngaysinh" name="ngaysinh" value="@Model.sinhVien.ngaysinh" required>
+                                                    <input type="datetime-local" class="form-control" id="ngaysinh" name="ngaysinh" required>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="ngayvao" class="form-label">Ngày vào:</label>
-                                                    <input type="datetime-local" class="form-control" id="ngayvao" name="ngayvao" value="@Model.sinhVien.ngayvao" required>
+                                                    <input type="datetime-local" class="form-control" id="ngayvao" name="ngayvao"  required>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="ngaythue" class="form-label">Ngày thuê:</label>
-                                                    <input type="datetime-local" class="form-control" id="ngaythue" name="ngaythue" value="@Model.thuePhong.ngaythue" required>
+                                                    <input type="datetime-local" class="form-control" id="ngaythue" name="ngaythue"  required>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="tinh" class="form-label">Tỉnh:</label>
@@ -151,6 +151,16 @@
     <script>
         Swal.fire({
             title: 'Gioi tính của sinh viên không thuộc về phòng đó!',
+            icon: "error",
+            showConfirmButton: false,
+        });
+    </script>
+}
+@if (TempData["loisonguoi"] != null)
+{
+    <script>
+        Swal.fire({
+            title: 'Số người trong phòng đã đầy!',
             icon: "error",
             showConfirmButton: false,
         });
