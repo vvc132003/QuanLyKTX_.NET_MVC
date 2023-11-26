@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DocumentFormat.OpenXml.Office2010.Excel;
+using Microsoft.AspNetCore.Mvc;
 using QuanLyKyTucXa_MVC.Models;
 using QuanLyKyTucXa_MVC.Service;
 
@@ -19,6 +20,27 @@ namespace QuanLyKyTucXa_MVC.Controllers
             phongService = phongServices;
             thuePhongService = thuePhongServices;
             chuyenPhongService = chuyenPhongServices;
+        }
+        public IActionResult Home()
+        {
+            if (HttpContext.Session.GetInt32("id") != null && HttpContext.Session.GetString("tendangnhap") != null)
+            {
+                List<SinhVien> sinhviens = sinhVienService.GetAllStudents();
+                List<Modeldata> modeldataList = new List<Modeldata>();
+                foreach (var sinhVien in sinhviens)
+                {
+                    Modeldata modeldata = new Modeldata
+                    {
+                        sinhVien = sinhVien
+                    };
+                    modeldataList.Add(modeldata);
+                }
+                return View(modeldataList);
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "DangNhap");
+            }
         }
 
         /// thuê phòng
@@ -67,6 +89,7 @@ namespace QuanLyKyTucXa_MVC.Controllers
                             phongService.CapNhatSoNguoiO(phong, phong.songuoio + 1);
                             thuePhong.trangthai = "Đã thuê";
                             thuePhongService.ThuePhong(thuePhong, sinhVien.id, idp, idnguoidung);
+                            sinhVienService.GuiEmail(sinhVien, thuePhong.ngaythue);
                             TempData["thuephongthanhcong"] = "Thuê phòng thành công!";
                             return RedirectToAction("Home", "Phong");
                         }
@@ -184,7 +207,6 @@ namespace QuanLyKyTucXa_MVC.Controllers
             {
                 SinhVien sinhvien = sinhVienService.SinhVienGteById(id);
                 TraPhong traphong = new TraPhong();
-
                 Modeldata yourModel = new Modeldata
                 {
                     sinhVien = sinhvien,

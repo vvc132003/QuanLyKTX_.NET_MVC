@@ -2,17 +2,18 @@
 using QuanLyKyTucXa_MVC.Models;
 using System.Data.SqlClient;
 using System.Data;
+using QuanLyKyTucXa_MVC.Repository;
 
 namespace QuanLyKyTucXa_MVC.Service
 {
-    public class DichVuService
+    public class DichVuService : DichVuRepository
     {
         private SqlConnection connection = DBUtils.GetDBConnection();
 
         public void ThemDichVu(DichVu dichVu)
         {
             connection.Open();
-            string sql = "INSERT INTO DichVu (tendichvu , mota , giatien , soluongcon , trangthai,ngaythem)" +
+            string sql = "INSERT INTO DichVu (tendichvu , mota , giatien , soluongcon , trangthai ,ngaythem)" +
                 "   VALUES (@tendichvu , @mota , @giatien , @soluongcon , @trangthai,@ngaythem)";
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
@@ -31,7 +32,7 @@ namespace QuanLyKyTucXa_MVC.Service
         {
             List<DichVu> dichVus = new List<DichVu>();
             connection.Open();
-            string sql = "SELECT * FROM DichVu";
+            string sql = "SELECT * FROM DichVu where trangthai = N'Còn sử dụng' ORDER BY id DESC";
             using (SqlCommand command = new SqlCommand(sql, connection))
             {
                 using (SqlDataReader reader = command.ExecuteReader())
@@ -73,16 +74,19 @@ namespace QuanLyKyTucXa_MVC.Service
             }
             connection.Close();
         }
-        public void XoaDichVu(int id)
+        public void XoaDichVu(DichVu dichVu , int id)
         {
-            connection.Open();
-            string query = "DELETE FROM DichVu WHERE id = @id";
-            using (SqlCommand command = new SqlCommand(query, connection))
+            using (SqlConnection connection = DBUtils.GetDBConnection())
             {
-                command.Parameters.AddWithValue("@id", id);
-                command.ExecuteNonQuery();
+                connection.Open();
+                string query = "  UPDATE DichVu set trangthai = @trangthai  WHERE id = @id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", id);
+                    command.Parameters.AddWithValue("@trangthai", dichVu.trangthai);
+                    command.ExecuteNonQuery();
+                }
             }
-            connection.Close();
         }
 
         public DichVu LayDichVuTheoTen(string tendichvu)

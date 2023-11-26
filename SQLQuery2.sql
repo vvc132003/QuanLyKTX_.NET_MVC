@@ -107,7 +107,9 @@ CREATE PROCEDURE GetAllStudents
 AS
 BEGIN
     SELECT *
-    FROM SinhVien WHERE  trang_thai = 'Ðã thuê'
+FROM SinhVien
+WHERE trang_thai = N'Đã thuê'
+ORDER BY id DESC;
 END
 --- thêm sinh viên
 CREATE PROCEDURE ThemSinhVienS

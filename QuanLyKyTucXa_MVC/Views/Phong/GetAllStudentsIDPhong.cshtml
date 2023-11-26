@@ -12,16 +12,13 @@
     <div id="main-wrapper">
         @Html.Partial("~/Views/layout/navbar.cshtml")
         @Html.Partial("~/Views/layout/header.cshtml")
+        <br />
         <div class="page-wrapper">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                @foreach (var sinhviens in Model)
-                                {
-                                    <p class="text-center ">Danh sách sinh viên trong phòng @sinhviens.sinhVien.idphong</p>
-                                }
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>

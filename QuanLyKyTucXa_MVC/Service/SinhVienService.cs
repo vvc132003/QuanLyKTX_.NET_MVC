@@ -3,6 +3,11 @@ using QuanLyKyTucXa_MVC.Repository;
 using System.Data.SqlClient;
 using System.Data;
 using ketnoicsdllan1;
+using System.Net.Mail;
+using System.Net;
+using System.Text;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 
 namespace QuanLyKyTucXa_MVC.Service
 {
@@ -390,6 +395,90 @@ namespace QuanLyKyTucXa_MVC.Service
         }
 
 
-       
+
+        public void Xuatexcel()
+        {
+            List<SinhVien> sinhviens = GetAllStudents();
+            string filePath = "C:\\Users\\vvc13\\OneDrive\\Documents\\sinhvien.xlsx";
+
+            IWorkbook workbook = new XSSFWorkbook();
+            ISheet worksheet = workbook.CreateSheet("DanhSachSinhVien");
+
+            IRow headerRow = worksheet.CreateRow(0);
+            headerRow.CreateCell(0).SetCellValue("Id");
+            headerRow.CreateCell(1).SetCellValue("Tên sinh viên");
+            headerRow.CreateCell(2).SetCellValue("Khóa học");
+            headerRow.CreateCell(3).SetCellValue("Ngành học");
+            headerRow.CreateCell(4).SetCellValue("Email");
+            headerRow.CreateCell(5).SetCellValue("Số điện thoại");
+            headerRow.CreateCell(6).SetCellValue("Id phòng");
+            headerRow.CreateCell(7).SetCellValue("Giới tính");
+            headerRow.CreateCell(8).SetCellValue("Tỉnh");
+            headerRow.CreateCell(8).SetCellValue("Quận");
+            headerRow.CreateCell(8).SetCellValue("Phường");
+            headerRow.CreateCell(9).SetCellValue("Trạng thái");
+            headerRow.CreateCell(10).SetCellValue("Số lần vi phạm");
+            headerRow.CreateCell(11).SetCellValue("Ngày vào");
+            headerRow.CreateCell(12).SetCellValue("Ngày sinh");
+
+
+            int rowIndex = 1;
+            foreach (var sinhvien in sinhviens)
+            {
+                IRow dataRow = worksheet.CreateRow(rowIndex);
+                dataRow.CreateCell(0).SetCellValue(sinhvien.id);
+                dataRow.CreateCell(1).SetCellValue(sinhvien.tensinhvien);
+                dataRow.CreateCell(2).SetCellValue(sinhvien.khoahoc);
+                dataRow.CreateCell(3).SetCellValue(sinhvien.nganhhoc);
+                dataRow.CreateCell(4).SetCellValue(sinhvien.email);
+                dataRow.CreateCell(5).SetCellValue(sinhvien.sodienthoai);
+                dataRow.CreateCell(6).SetCellValue(sinhvien.idphong); 
+                dataRow.CreateCell(7).SetCellValue(sinhvien.gioitinh);
+                dataRow.CreateCell(8).SetCellValue(sinhvien.tinh);
+                dataRow.CreateCell(8).SetCellValue(sinhvien.quan);
+                dataRow.CreateCell(8).SetCellValue(sinhvien.phuong);
+                dataRow.CreateCell(9).SetCellValue(sinhvien.trang_thai);
+                dataRow.CreateCell(10).SetCellValue(sinhvien.solanvipham); 
+                dataRow.CreateCell(11).SetCellValue(sinhvien.ngayvao.ToString("yyyy-MM-dd")); 
+                dataRow.CreateCell(12).SetCellValue(sinhvien.ngaysinh.ToString("yyyy-MM-dd")); 
+                rowIndex++;
+            }
+
+            using (FileStream file = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            {
+                workbook.Write(file);
+            }
+        }
+
+
+
+        public void GuiEmail(SinhVien sinhvien, DateTime ngaythue)
+        {
+            try
+            {
+                string fromEmail = "vvc132003@gmail.com";
+                string password = "qyqgwwjbbajzrrex";
+                string toEmail = sinhvien.email;
+                MailMessage message = new MailMessage(fromEmail, toEmail);
+                message.Subject = "Ban da thue phong thanh cong";
+                StringBuilder bodyBuilder = new StringBuilder();
+                bodyBuilder.AppendLine($"Mã sinh viên: {sinhvien.id}");
+                bodyBuilder.AppendLine($"Tên sinh viên: {sinhvien.tensinhvien}");
+                bodyBuilder.AppendLine($"Số phòng: {sinhvien.idphong}");
+                bodyBuilder.AppendLine($"Ngày vào: {sinhvien.ngayvao}");
+                bodyBuilder.AppendLine($"Ngày thuê: {ngaythue}");
+                message.Body = bodyBuilder.ToString();
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential(fromEmail, password);
+                smtpClient.EnableSsl = true;
+                smtpClient.Send(message);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Loi: " + ex.Message);
+            }
+        }
+
     }
 }

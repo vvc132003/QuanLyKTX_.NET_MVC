@@ -99,7 +99,7 @@
                                 <div class="text-bg-secondary p-2">Thông tin chuyển phòng</div>
                                 <div class="border border-secondary-subtle" style="padding:10px 20px">
                                     <form action="/SinhVien/ChuyenPhong" method="post">
-                                        <input type="" class="form-control" id="id" name="id" value="@Model.sinhVien.id">
+                                        <input type="hidden" class="form-control" id="id" name="id" value="@Model.sinhVien.id">
                                         <input type="hidden" id="idnguoidung" name="idnguoidung" value="@ViewData["id"]" class="form-control" />
                                         <div class="mb-3 ">
                                             <label for="lydo" class="form-label">Lý do:</label><br />

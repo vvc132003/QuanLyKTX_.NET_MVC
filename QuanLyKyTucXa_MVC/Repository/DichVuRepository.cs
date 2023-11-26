@@ -7,7 +7,7 @@ namespace QuanLyKyTucXa_MVC.Repository
         void ThemDichVu(DichVu dichVu);
         List<DichVu> GetAllDichVu();
         void SuaDichVu(DichVu dichVu);
-        void XoaDichVu(int id);
+        void XoaDichVu(DichVu dichVu,int id);
         DichVu LayDichVuTheoTen(string tendichvu);
         void CapNhatSoLuongConChoDV(int iddv, int soluongcon);
     }

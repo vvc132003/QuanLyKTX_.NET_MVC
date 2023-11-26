@@ -4,6 +4,8 @@ namespace QuanLyKyTucXa_MVC.Repository
 {
     public interface KyLuatRepository
     {
-        void ThemKyLuat(KyLuat kyLuat, int idNguoiDung, string idSinhVien);
+        List<KyLuat> GetAllKyLuat();
+        void ThemKyLuat(KyLuat kyLuat, string idSinhVien);
+        void HuyKyLuat(int id);
     }
 }
