@@ -37,7 +37,7 @@
                                             <div class="mb-3">
                                                 <label for="tensinhvien" class="form-label">
                                                     Tên sinh viên:
-                                                </label> <input type="text" class="form-control" id="tensinhvien" name="tensinhvien" value="@Model?.sinhVien?.tensinhvien">
+                                                </label> <input type="text" class="form-control" id="tensinhvien" name="tensinhvien" value="@Model.sinhVien.tensinhvien">
                                             </div>
                                             <div class="mb-3">
                                                 <label for="khoahoc" class="form-label">Khóa học:</label>
@@ -60,34 +60,33 @@
                                             <div class="mb-3">
                                                 <label for="gioitinh" class="form-label">Gioi tính:</label>
                                                 <select id="gioitinh" name="gioitinh" class="form-control">
-                                                    <option value="Nam" selected>Nam</option>
-                                                    <option value="Nữ" selected>Nữ</option>
+                                                    <option value="@Model.sinhVien.gioitinh" selected>@Model.sinhVien.gioitinh</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ngaysinh" class="form-label">Ngày sinh:</label>
-                                                <input type="datetime-local" class="form-control" id="ngaysinh" name="ngaysinh" value="@Model.sinhVien.ngaysinh" required>
+                                                <input type="text" class="form-control" id="ngaysinh" name="ngaysinh" value="@Model.sinhVien.ngaysinh" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ngayvao" class="form-label">Ngày vào:</label>
-                                                <input type="datetime-local" class="form-control" id="ngayvao" name="ngayvao" value="@Model.sinhVien.ngayvao" required>
+                                                <input type="text" class="form-control" id="ngayvao" name="ngayvao" value="@Model.sinhVien.ngayvao" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="tinh" class="form-label">Tỉnh:</label>
                                                 <select id="tinh" name="tinh" class="form-control">
-                                                    <option value="" selected>Chọn tỉnh thành</option>
+                                                    <option value="@Model.sinhVien.tinh" selected>@Model.sinhVien.tinh</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="quan" class="form-label">Quận/huyện:</label>
                                                 <select id="quan" name="quan" class="form-control">
-                                                    <option value="" selected>Chọn quận huyện</option>
+                                                    <option value="@Model.sinhVien.quan" selected>@Model.sinhVien.quan</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="phuong" class="form-label">Phường/xã:</label>
                                                 <select id="phuong" name="phuong" class="form-control">
-                                                    <option value="" selected>Chọn phường xã</option>
+                                                    <option value="@Model.sinhVien.phuong" selected>@Model.sinhVien.phuong</option>
                                                 </select>
                                             </div>
                                         </div>

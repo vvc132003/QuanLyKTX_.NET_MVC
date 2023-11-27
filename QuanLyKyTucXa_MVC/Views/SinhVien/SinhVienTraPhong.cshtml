@@ -58,34 +58,33 @@
                                             <div class="mb-3">
                                                 <label for="gioitinh" class="form-label">Gioi tính:</label>
                                                 <select id="gioitinh" name="gioitinh" class="form-control">
-                                                    <option value="Nam" selected>Nam</option>
-                                                    <option value="Nữ" selected>Nữ</option>
+                                                    <option value="@Model.sinhVien.gioitinh" selected>@Model.sinhVien.gioitinh</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ngaysinh" class="form-label">Ngày sinh:</label>
-                                                <input type="datetime-local" class="form-control" id="ngaysinh" name="ngaysinh" value="@Model.sinhVien.ngaysinh" required>
+                                                <input type="text" class="form-control" id="ngaysinh" name="ngaysinh" value="@Model.sinhVien.ngaysinh" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ngayvao" class="form-label">Ngày vào:</label>
-                                                <input type="datetime-local" class="form-control" id="ngayvao" name="ngayvao" value="@Model.sinhVien.ngayvao" required>
+                                                <input type="text" class="form-control" id="ngayvao" name="ngayvao" value="@Model.sinhVien.ngayvao" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="tinh" class="form-label">Tỉnh:</label>
                                                 <select id="tinh" name="tinh" class="form-control">
-                                                    <option value="" selected>Chọn tỉnh thành</option>
+                                                    <option value="@Model.sinhVien.tinh" selected>@Model.sinhVien.tinh</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="quan" class="form-label">Quận/huyện:</label>
                                                 <select id="quan" name="quan" class="form-control">
-                                                    <option value="" selected>Chọn quận huyện</option>
+                                                    <option value="@Model.sinhVien.quan" selected>@Model.sinhVien.quan</option>
                                                 </select>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="phuong" class="form-label">Phường/xã:</label>
                                                 <select id="phuong" name="phuong" class="form-control">
-                                                    <option value="" selected>Chọn phường xã</option>
+                                                    <option value="@Model.sinhVien.phuong" selected>@Model.sinhVien.phuong</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -132,56 +131,3 @@
 <script src="/static/jquery-3.2.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script>
-    const host = "https://provinces.open-api.vn/api/";
-    var callAPI = (api) => {
-        return axios.get(api)
-            .then((response) => {
-                renderData(response.data, "tinh");
-            });
-    }
-    callAPI('https://provinces.open-api.vn/api/?depth=1');
-    var callApiDistrict = (api) => {
-        return axios.get(api)
-            .then((response) => {
-                renderData(response.data.districts, "quan");
-            });
-    }
-    var callApiWard = (api) => {
-        return axios.get(api)
-            .then((response) => {
-                renderData(response.data.wards, "phuong");
-            });
-    }
-
-    var renderData = (array, select) => {
-        let row = ' <option disable value="">Chọn</option>';
-        array.forEach(element => {
-            row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
-        });
-        document.querySelector("#" + select).innerHTML = row
-    }
-
-    $("#tinh").change(() => {
-        callApiDistrict(host + "p/" + $("#tinh").find(':selected').data('id') + "?depth=2");
-        printResult();
-    });
-    $("#quan").change(() => {
-        callApiWard(host + "d/" + $("#quan").find(':selected').data('id') + "?depth=2");
-        printResult();
-    });
-    $("#phuong").change(() => {
-        printResult();
-    })
-
-    var printResult = () => {
-        if ($("#quan").find(':selected').data('id') != "" && $("#tinh").find(':selected').data('id') != "" &&
-            $("#phuong").find(':selected').data('id') != "") {
-            let result = $("#tinh option:selected").text() +
-                " | " + $("#quan option:selected").text() + " | " +
-                $("#phuong option:selected").text();
-            $("#result").text(result)
-        }
-
-    }
-</script>

@@ -18754,6 +18754,7 @@ File: scss
     text-align: center;
     background-color: #999999;
     color: white;
+    font-size:12px;
 }
 
 .table {
@@ -18761,7 +18762,14 @@ File: scss
     border-collapse: collapse;
 }
 
-    .table th, .table td {
-        border: 1px solid #ccc;
-        / padding: 8px;
-    }
+.table th, .table td {
+    border: 1px solid #ccc;
+}
+
+tbody, td, tfoot, th, thead, tr {
+    border-color: inherit;
+    border-style: solid;
+    border-width: 0;
+    font-size: 12px;
+    text-align:center;
+}

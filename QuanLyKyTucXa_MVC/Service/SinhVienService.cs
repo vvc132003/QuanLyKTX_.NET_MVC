@@ -137,7 +137,7 @@ namespace QuanLyKyTucXa_MVC.Service
             using (SqlConnection connection = DBUtils.GetDBConnection())
             {
                 connection.Open();
-                string query = "SELECT id,idphong,ngayvao,gioitinh,solanvipham,tensinhvien FROM SinhVien WHERE id = @id";
+                string query = "SELECT * FROM SinhVien WHERE id = @id";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@id", id);
@@ -148,11 +148,20 @@ namespace QuanLyKyTucXa_MVC.Service
                             SinhVien sinhVien = new SinhVien
                             {
                                 id = reader["id"].ToString(),
-                                idphong = (int)reader["idphong"],
-                                ngayvao = (DateTime)reader["ngayvao"],
-                                gioitinh = reader["gioitinh"].ToString(),
-                                solanvipham = (int)reader["solanvipham"],
                                 tensinhvien = reader["tensinhvien"].ToString(),
+                                khoahoc = reader["khoahoc"].ToString(),
+                                nganhhoc = reader["nganhhoc"].ToString(),
+                                email = reader["email"].ToString(),
+                                sodienthoai = reader["sodienthoai"].ToString(),
+                                idphong = (int)reader["idphong"],
+                                gioitinh = reader["gioitinh"].ToString(),
+                                tinh = reader["tinh"].ToString(),
+                                quan = reader["quan"].ToString(),
+                                phuong = reader["phuong"].ToString(),
+                                trang_thai = reader["trang_thai"].ToString(),
+                                solanvipham = (int)reader["solanvipham"],
+                                ngayvao = (DateTime)reader["ngayvao"],
+                                ngaysinh = (DateTime)reader["ngaysinh"]
                             };
                             return sinhVien;
                         }
