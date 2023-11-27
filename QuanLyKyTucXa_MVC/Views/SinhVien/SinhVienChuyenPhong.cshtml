@@ -118,7 +118,7 @@
                                                 {
                                                     foreach (var phong in Model.phongs)
                                                     {
-                                                        <option value="@phong.id">@phong.id</option>
+                                                        <option value="@phong.id">Số phòng:@phong.id - Loại phòng:@phong.loaiphong - Số người:@phong.songuoio</option>
                                                     }
                                                 }
                                                 else
@@ -154,6 +154,7 @@
 {
     <script>
         Swal.fire({
+            position: "top-right",
             title: 'Ngày tháng bạn nhập không hợp lệ!',
             icon: "error",
             showConfirmButton: false,
@@ -164,6 +165,7 @@
 {
     <script>
         Swal.fire({
+            position: "top-right",
             title: 'Gioi tính của sinh viên không thuộc về phòng đó!',
             icon: "error",
             showConfirmButton: false,
@@ -174,6 +176,7 @@
 {
     <script>
         Swal.fire({
+            position: "top-right",
             title: 'Số người phòng mới đã đầy!',
             icon: "error",
             showConfirmButton: false,
