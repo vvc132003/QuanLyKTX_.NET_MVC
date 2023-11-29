@@ -65,11 +65,11 @@ namespace QuanLyKyTucXa_MVC.Controllers
             {
                 Modeldata modeldata = new Modeldata
                 {
-                    sinhVien = sinhVien 
+                    sinhVien = sinhVien
                 };
                 modeldataList.Add(modeldata);
             }
-            return View(modeldataList); 
+            return View(modeldataList);
         }
 
     }

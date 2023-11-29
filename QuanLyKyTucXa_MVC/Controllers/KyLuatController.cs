@@ -42,11 +42,11 @@ namespace QuanLyKyTucXa_MVC.Controllers
             }
         }
         // chức năng kyer luật
-        public IActionResult KyLuat(KyLuat kyLuat ,string masv)
+        public IActionResult KyLuat(KyLuat kyLuat, string masv)
         {
             if (HttpContext.Session.GetInt32("id") != null && HttpContext.Session.GetString("tendangnhap") != null)
             {
-                if(sinhVienService.KiemTraTonTaiMaSinhVien(masv))
+                if (sinhVienService.KiemTraTonTaiMaSinhVien(masv))
                 {
                     SinhVien sinhvien = sinhVienService.SinhVienGteById(masv);
                     if (sinhvien != null)

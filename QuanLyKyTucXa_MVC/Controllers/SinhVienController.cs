@@ -62,7 +62,7 @@ namespace QuanLyKyTucXa_MVC.Controllers
                 ViewData["id"] = idnd;
                 ViewData["tendangnhap"] = tendangnhap;
                 return View("SinhVienThuePhong", yourModel);
-                }
+            }
             else
             {
                 return RedirectToAction("DangNhap", "DangNhap");
@@ -70,7 +70,7 @@ namespace QuanLyKyTucXa_MVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult ThuePhong(SinhVien sinhVien,ThuePhong thuePhong, int idp, int idnguoidung)
+        public IActionResult ThuePhong(SinhVien sinhVien, ThuePhong thuePhong, int idp, int idnguoidung)
         {
             if (HttpContext.Session.GetInt32("id") != null && HttpContext.Session.GetString("tendangnhap") != null)
             {
@@ -79,7 +79,7 @@ namespace QuanLyKyTucXa_MVC.Controllers
                 {
                     if (phong.loaiphong == sinhVien.gioitinh)
                     {
-                        if(sinhVien.ngaysinh.Day < sinhVien.ngayvao.Day ||
+                        if (sinhVien.ngaysinh.Day < sinhVien.ngayvao.Day ||
                         sinhVien.ngaysinh.Month < sinhVien.ngayvao.Month)
                         {
                             sinhVien.idphong = idp;
