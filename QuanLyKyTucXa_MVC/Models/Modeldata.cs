@@ -13,5 +13,7 @@
         public KyLuat kyLuat { get; set; }
         public ThongTinKhenThuong thongTinKhenThuong { get; set; }
         public TraPhong traPhong { get; set; }
+        public List<NhanVien> nhanViens { get; set; }
+        public BoPhan boPhans { get; set; }
     }
 }

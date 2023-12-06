@@ -7,9 +7,12 @@ namespace QuanLyKyTucXa_MVC.Controllers
     public class DichVuController : Controller
     {
         private readonly DichVuService dichVuService;
-        public DichVuController(DichVuService dichVuServices)
+        private readonly BoPhanService boPhanService;
+
+        public DichVuController(DichVuService dichVuServices, BoPhanService boPhanServiceS)
         {
             dichVuService = dichVuServices;
+            boPhanService = boPhanServiceS;
         }
         public IActionResult Home()
         {
@@ -32,6 +35,30 @@ namespace QuanLyKyTucXa_MVC.Controllers
                 return RedirectToAction("DangNhap", "DangNhap");
             }
         }
+        public IActionResult bophan()
+        {
+            if (HttpContext.Session.GetInt32("id") != null && HttpContext.Session.GetString("tendangnhap") != null)
+            {
+                List<BoPhan> boPhans = boPhanService.GetAllBoPhan();
+                List<Modeldata> modeldataList = new List<Modeldata>();
+                foreach (var boPhan in boPhans)
+                {
+                    List<NhanVien> nhanViens = boPhanService.GetallNhanVientheoid(boPhan.id); 
+                    Modeldata modeldata = new Modeldata
+                    {
+                        boPhans = boPhan,
+                        nhanViens = nhanViens,
+                    };
+                    modeldataList.Add(modeldata);
+                }
+                return View(modeldataList);
+            }
+            else
+            {
+                return RedirectToAction("DangNhap", "DangNhap");
+            }
+        }
+
         // chức năng them dich vụ
         public IActionResult ThemDichVu(DichVu dichVu)
         {

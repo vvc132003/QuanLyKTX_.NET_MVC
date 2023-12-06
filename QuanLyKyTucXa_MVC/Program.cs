@@ -16,6 +16,7 @@ builder.Services.AddScoped<DichVuService>();
 builder.Services.AddScoped<ThueDichVuService>();
 builder.Services.AddScoped<KyLuatService>();
 builder.Services.AddScoped<ThongTinKhenThuongService>();
+builder.Services.AddScoped<BoPhanService>();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);

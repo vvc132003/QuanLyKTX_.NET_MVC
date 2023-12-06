@@ -63,11 +63,11 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ngaysinh" class="form-label">Ngày sinh:</label>
-                                                <input type="text" class="form-control" id="ngaysinh" name="ngaysinh" value="@Model.sinhVien.ngaysinh" required>
+                                                <input type="text" class="form-control" id="ngaysinh" name="ngaysinh" value="@Model.sinhVien.ngaysinh.ToString("dd/MM/yyyy")" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="ngayvao" class="form-label">Ngày vào:</label>
-                                                <input type="text" class="form-control" id="ngayvao" name="ngayvao" value="@Model.sinhVien.ngayvao" required>
+                                                <input type="text" class="form-control" id="ngayvao" name="ngayvao" value="@Model.sinhVien.ngayvao.ToString("dd/MM/yyyy")" required>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="tinh" class="form-label">Tỉnh:</label>
